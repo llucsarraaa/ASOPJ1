@@ -66,3 +66,6 @@ Instal·lem Python 3 i el framework web Flask necessaris per al servidor.
 sudo apt update
 sudo apt install -y python3 python3-flask
 
+<img width="690" height="212" alt="1" src="https://github.com/user-attachments/assets/72d4aad8-c97b-481d-bd74-b10b8f8cb768" />
+
+<img width="665" height="507" alt="image" src="https://github.com/user-attachments/assets/317ae173-ec52-4fc8-afb4-e2782a23c53d" />
