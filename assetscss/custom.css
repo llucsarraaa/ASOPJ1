@@ -1,1 +1,296 @@
+/* ==========================================================
+   TEMA CYBER-GLITCH
+   Mateixos selectors que el CSS original, sense canvis d'HTML
+   ========================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+  --bg: #05070d;
+  --bg-2: #0a0f1a;
+  --text: #c8ffe9;
+  --text-dim: #6f8f86;
+  --neon: #00ff9c;
+  --cyan: #00e5ff;
+  --magenta: #ff2e63;
+  --line: #123b33;
+}
+
+/* Estils generals */
+body {
+  margin: 0;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  line-height: 1.5;
+  padding: 0 15px;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0, 255, 156, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 156, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Línies d'escaneig CRT sobre tota la pàgina */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.22) 3px
+  );
+}
+
+::selection {
+  background: var(--neon);
+  color: var(--bg);
+}
+
+/* Suavitza les línies horitzontals -> línia de "terminal" */
+hr {
+  border: none;
+  border-top: 1px dashed var(--neon);
+  opacity: 0.5;
+  margin: 24px 0;
+}
+
+/* Títols */
+h1, h2, h3 {
+  font-family: 'Rajdhani', 'Share Tech Mono', monospace;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  color: var(--neon);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 8px rgba(0, 255, 156, 0.45);
+}
+
+/* Prefix estil terminal */
+h2::before { content: "# ";  color: var(--cyan); }
+h3::before { content: "## "; color: var(--cyan); }
+
+/* Títols específics */
+h1 {
+  font-size: 2.5em; /* 40px */
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  text-shadow:
+    2px 0 var(--magenta),
+    -2px 0 var(--cyan);
+  animation: glitch 3.5s infinite steps(1, end);
+}
+
+h1::after {
+  content: "_";
+  color: var(--neon);
+  margin-left: 4px;
+  animation: blink 1s infinite steps(1, end);
+}
+
+h2 {
+  font-size: 2em; /* 32px */
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+}
+
+h3 {
+  font-size: 1.5em; /* 24px */
+  color: var(--cyan);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+/* Enllaços */
+a {
+  color: var(--cyan);
+  text-decoration: none;
+  margin-bottom: 5px;
+  display: inline-block;
+  font-size: 1.05em;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+a:hover {
+  color: var(--neon);
+  text-decoration: none;
+  border-bottom: 1px solid var(--neon);
+  text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan);
+  animation: glitch-small 0.4s steps(2, end) 1;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--magenta);
+  outline-offset: 3px;
+}
+
+li {
+  line-height: 1.4;
+}
+
+li::marker {
+  color: var(--neon);
+}
+
+/* Botons de desplaçament (amunt i avall) a la part inferior dreta */
+#scrollButtons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+#scrollUpBtn, #scrollDownBtn, #goToHomeBtn {
+  background-color: var(--bg-2);
+  color: var(--neon);
+  border: 1px solid var(--neon);
+  padding: 12px 15px;
+  font-family: inherit;
+  font-size: 1.4em;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 255, 156, 0.35), inset 0 0 8px rgba(0, 255, 156, 0.15);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+}
+
+#scrollUpBtn:hover, #scrollDownBtn:hover, #goToHomeBtn:hover {
+  background-color: var(--neon);
+  color: var(--bg);
+  box-shadow: 0 0 18px rgba(0, 255, 156, 0.8);
+}
+
+/* Botó de "Tornar a l'inici" */
+#goToHomeBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Millorar la separació entre text i les icones de llicència */
+footer .license {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  color: var(--text-dim);
+}
+
+.license-icon {
+  max-width: 1.5em;
+  max-height: 1.5em;
+  margin-left: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+  display: inline-block;
+  filter: invert(1) drop-shadow(0 0 3px var(--neon));
+}
+
+/* Afegir marge entre les imatges de les llicències */
+footer .license img {
+  margin-right: 10px;
+}
+
+/* Afegir espai entre les imatges i el text */
+img {
+  display: block;
+  margin: 20px 0;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 14px rgba(0, 255, 156, 0.18);
+}
+
+/* Codi i cites, per si en surten a la pàgina */
+code, pre {
+  font-family: inherit;
+  background: var(--bg-2);
+  color: var(--neon);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+}
+
+pre {
+  padding: 12px;
+  overflow-x: auto;
+}
+
+blockquote {
+  margin: 16px 0;
+  padding: 8px 16px;
+  border-left: 3px solid var(--magenta);
+  background: var(--bg-2);
+  color: var(--text-dim);
+}
+
+/* Responsivitat per dispositius petits */
+@media (max-width: 600px) {
+  body {
+    padding: 0 10px;
+  }
+
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.6em; }
+  h3 { font-size: 1.25em; }
+
+  /* Botons fixos ajustats per a mòbils */
+  #scrollButtons {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  #goToHomeBtn {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* ---------- Animacions ---------- */
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Glitch del títol: quasi tot el temps estable, petits talls ocasionals */
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: none;
+    text-shadow: 2px 0 var(--magenta), -2px 0 var(--cyan);
+  }
+  91% {
+    transform: translate(-3px, 1px) skewX(-6deg);
+    text-shadow: 4px 0 var(--magenta), -4px 0 var(--cyan);
+  }
+  93% {
+    transform: translate(3px, -1px) skewX(5deg);
+    text-shadow: -4px 0 var(--magenta), 4px 0 var(--cyan);
+  }
+  95% {
+    transform: translate(-1px, 0);
+    text-shadow: 2px 2px var(--magenta), -2px -2px var(--cyan);
+  }
+  97% {
+    transform: none;
+  }
+}
+
+@keyframes glitch-small {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-2px, 1px); }
+  66%  { transform: translate(2px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Accessibilitat: sense moviment si l'usuari ho demana */
+@media (prefers-reduced-motion: reduce) {
+  h1, h1::after, a:hover {
+    animation: none;
+  }
+}
