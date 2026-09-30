@@ -32,3 +32,37 @@ title: "SISTEMES D'INICI"
 * **Procés:** Instància o funció interna en execució controlada pel sistema operatiu.
 
 > **Nota:** Les aplicacions i els serveis generen un o més processos individualitzats, els quals el sistema operatiu s'encarrega de planificar i sincronitzar contínuament.
+
+
+
+
+
+# 🛡️ Pràctica Systemd: SysHealth Dashboard
+
+Aquest projecte demostra la creació i configuració d'un **target de systemd personalitzat** (`syshealth.target`) configurat com a target per defecte (*default target*). El target coordina dos serveis en segon pla executats amb permisos de superusuari (`root`):
+1. **Un recolector de mètriques**: Executa un script en Bash que desa l'estat del sistema en format JSON.
+2. **Un servidor web Flask**: Ofereix una interfície gràfica per visualitzar el dashboard en temps real a través del navegador.
+
+---
+
+## 📋 Taula d'Objectius Completats
+
+| Requisit | Estat | Implementació |
+| :--- | :---: | :--- |
+| **1. Crear target propi, fer-lo default i comprovar accés** |  `syshealth.target` creat, definit com a default amb `systemctl set-default` i verificat amb `get-default`. |
+| **2. Crear serveis dintre del target i comprovar inici** |  `syshealth-collector.service` i `syshealth-web.service` associats mitjançant `WantedBy=syshealth.target`. |
+| **3. Executar script amb permisos de root** |  Configurat `User=root` als fitxers de servei unitats de systemd. |
+| **4. Programar script i provar-lo manualment** |  Script `syshealth_collector.sh` provat manualment verificant la generació de dades. |
+
+---
+
+## 🚀 Guia de Desplegament Pas a Pas
+
+### PAS 1: Preparar l'entorn i instal·lar dependències
+
+Instal·lem Python 3 i el framework web Flask necessaris per al servidor.
+
+```bash
+sudo apt update
+sudo apt install -y python3 python3-flask
+
